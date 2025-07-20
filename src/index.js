@@ -1,9 +1,7 @@
-import createTask from "./modules/task.js"
 import createProject from "./modules/project.js"
 
-let defaultTasks = new createProject('Default'); 
+let defaultProject = new createProject('Default'); 
+    
+defaultProject.createTask('Drying', 'Cloth drying process for my meeting', '21 july 2025', 'very high');
 
-let laundry = new createTask('Laundry', 'Wash the Laundry items asap!!', '20th July 2025, 18:00', 'high', 'default');
-
-defaultTasks.addTask(laundry);
-console.log(laundry.description);
+console.log(defaultProject.tasksList);

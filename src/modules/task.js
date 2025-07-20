@@ -5,5 +5,11 @@ export default class Task {
         this.dueDate = dueDate;
         this.priority = priority;
         this.projectCategory = projectCategory;
+        this.taskId = generateRandomId();
     }
 }
+
+function generateRandomId() {
+    const id = Math.floor(Math.random() * 100000);
+    return id;
+} 
