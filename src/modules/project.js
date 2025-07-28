@@ -41,13 +41,18 @@ const projectMethods = (() => {
         });
     };
 
-    const editProject = (projectTitle) => {
-        
+    const editProject = (oldTitle, newTitle) => {
+        projectsList.forEach(project => {
+            if (project.title === oldTitle) {
+                project.title = newTitle;
+            }
+        });
     }
 
     return {
         createProject,
-        deleteProject
+        deleteProject,
+        editProject
     }
 }) ();
 
@@ -73,8 +78,33 @@ const taskMethods = (() => {
         })
     }
 
+    const editTask = (title, description, dueDate, priority, isCompleted, projectCategory, oldTitle) => {
+        projectsList.forEach(project => {
+            project.tasksList.forEach(task => {
+                if (task.title === oldTitle) {
+                    task.title = checkUndefined(title, task.title);
+                    task.description = checkUndefined(description, task.description);
+                    task.dueDate = checkUndefined(dueDate, task.dueDate);
+                    task.priority = checkUndefined(priority, task.priority);
+                    task.isCompleted = checkUndefined(isCompleted, task.isCompleted);
+                    task.projectCategory = checkUndefined(projectCategory, task.projectCategory);
+                }
+            })
+        })
+    }
+
+    const checkUndefined = (property, originalProperty) => {
+        if (property === undefined | property === '' | property === null) {
+            property = originalProperty;
+            return property;
+        } else {
+            return property;
+        }
+    }
+
     return {
         createTask,
-        deleteTask
+        deleteTask,
+        editTask
     }
 }) ();
