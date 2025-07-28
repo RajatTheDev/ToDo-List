@@ -1,23 +1,20 @@
-import projectCreator, {projectsList, projectMethods} from "./modules/project.js";
+import {projectsList, projectMethods, taskMethods} from "./modules/project.js";
 
 // default project
 
-const defaultProjects = () => { 
-    let defaultProject = new projectCreator('Default');
 
-    defaultProject.createTask('Washing', 'Cloth Washing process for my meeting', '20 july 2025', 'high', 'Default');
-    defaultProject.createTask('Drying', 'Cloth drying process for my meeting', '21 july 2025', 'high', 'Default');
-    defaultProject.createTask('Attend Meeting', 'Join the meeting at 9:00 AM', '22 july 2025', 'high', 'Default');
-    console.table(defaultProject.tasksList);
-    projectMethods.pushProject(defaultProject);
-}
+projectMethods.createProject('Default');
+projectMethods.createProject('Day Start');
+projectMethods.createProject('Random');
+projectMethods.createProject('Personal');
 
-const newDefaultProjects = () => {
-    let newDefaultProject = new projectCreator('Day Start');
-    projectMethods.pushProject(newDefaultProject);
-}
+taskMethods.createTask('Washing', 'Cloth Washing process for my meeting', '20 july 2025', 'high', true,'Default');
+taskMethods.createTask('Drying', 'Cloth drying process for my meeting', '21 july 2025', 'high', true,'Default');
+taskMethods.createTask('Attend Meeting', 'Join the meeting at 9:00 AM', '22 july 2025', 'high', false,'Default');
+taskMethods.createTask('Hair Styling', 'Get your hairs ready for the Party!', '23 November 2025', false,'pretty high', 'Personal')
 
-defaultProjects();
-newDefaultProjects();
+console.table(projectsList);
 
+projectMethods.deleteProject('Day Start');
+taskMethods.deleteTask('Drying');
 console.table(projectsList);
