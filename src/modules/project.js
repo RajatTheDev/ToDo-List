@@ -16,12 +16,27 @@ export default class Project {
     }
     
     deleteTask (taskTitle) {
+        let count = 0;
         this.tasksList.forEach(task => {
             if(task.title === taskTitle) {
-                this.tasksList.splice(task.id, 1);
+                this.tasksList.splice(count, 1);
             }
+            count++;
         });
     };
+
+    editTask (title, description, dueDate, priority, isCompleted, projectCategory, oldTitle) {
+        this.tasksList.forEach(task => {
+            if (task.title === oldTitle) {
+                task.title = checkUndefined(title, task.title);
+                task.description = checkUndefined(description, task.description);
+                task.dueDate = checkUndefined(dueDate, task.dueDate);
+                task.priority = checkUndefined(priority, task.priority);
+                task.isCompleted = checkUndefined(isCompleted, task.isCompleted);
+                task.projectCategory = checkUndefined(projectCategory, task.projectCategory);
+            }
+        })
+    }
 }
 
 const projectMethods = (() => {
@@ -58,7 +73,7 @@ const projectMethods = (() => {
 
 const taskMethods = (() => {
 
-    const createTask = (title, description, dueDate, priority, isCompleted, projectCategory) => {
+    const addTask = (title, description, dueDate, priority, isCompleted, projectCategory) => {
         projectsList.forEach(project => {
             if (project.title === projectCategory) {
                 project.createTask(title, description, dueDate, priority, isCompleted, projectCategory);
@@ -69,42 +84,27 @@ const taskMethods = (() => {
     const deleteTask = (taskTitle) => {
         let count = 0;
         projectsList.forEach(project => {
-            project.tasksList.forEach(task => {
-                if (task.title === taskTitle) {
-                    project.tasksList.splice(count, 1);
-                }
-                count++;
-            })
+            project.deleteTask(taskTitle);
         })
     }
 
     const editTask = (title, description, dueDate, priority, isCompleted, projectCategory, oldTitle) => {
         projectsList.forEach(project => {
-            project.tasksList.forEach(task => {
-                if (task.title === oldTitle) {
-                    task.title = checkUndefined(title, task.title);
-                    task.description = checkUndefined(description, task.description);
-                    task.dueDate = checkUndefined(dueDate, task.dueDate);
-                    task.priority = checkUndefined(priority, task.priority);
-                    task.isCompleted = checkUndefined(isCompleted, task.isCompleted);
-                    task.projectCategory = checkUndefined(projectCategory, task.projectCategory);
-                }
-            })
+            project.editTask(title, description, dueDate, priority, isCompleted, projectCategory, oldTitle);
         })
     }
 
-    const checkUndefined = (property, originalProperty) => {
-        if (property === undefined | property === '' | property === null) {
-            property = originalProperty;
-            return property;
-        } else {
-            return property;
-        }
-    }
-
     return {
-        createTask,
+        addTask,
         deleteTask,
         editTask
     }
 }) ();
+
+const checkUndefined = (property, originalProperty) => {
+    if (property === undefined | property === '' | property === null) {
+        return originalProperty;
+    } else {
+        return property;
+    }
+};
