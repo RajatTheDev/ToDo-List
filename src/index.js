@@ -67,6 +67,19 @@ const taskCreationForm = (() => {
         dialog.close();
     })
 
+    form.addEventListener('submit', (event) => {
+
+        event.preventDefault();
+        const title = document.getElementById('new-task-title').value.trim();
+        const description = document.getElementById('new-task-description').value.trim();
+        const dueDate = document.getElementById('new-task-due-date').value;
+        const priority = document.getElementById('new-task-priority').value;
+        const projectID = document.getElementById('new-task-project-category').value;
+
+        taskMethods.addTask(title, description, dueDate, priority, projectID);
+
+    });
+
 }) ();
 
 console.table(projectsList);

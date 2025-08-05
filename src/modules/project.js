@@ -1,5 +1,6 @@
 import taskCreator from "./task.js";
-export {projectsList, projectMethods, taskMethods};  
+import { projectUpdater } from "./dom.js";
+export { projectsList, projectMethods, taskMethods };  
 
 let projectsList = [];
 
@@ -8,6 +9,7 @@ export default class Project {
         this.title = title;
         this.projectID = crypto.randomUUID()
         this.tasksList = [];
+        projectUpdater.uploadProject(this.title, this.projectID);
     }
 
     createTask (title, description, dueDate, priority, projectCategory) {

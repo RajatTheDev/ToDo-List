@@ -27,22 +27,28 @@
                 <form method="dialog" id="new-task-form">
                     <div>
                         <label for="task-title">*Task Name</label>
-                        <input type="text" id="task-title" name="task-title" placeholder="Diwali preparation" required>
+                        <input type="text" id="new-task-title" name="task-title" placeholder="Diwali preparation" required>
                     </div>
                     <div>
                         <label for="task-description">Description</label>
-                        <textarea name="task-description" id="task-description" rows="4" placeholder="Eg: Buy crackers from the shop for today's festive prep"></textarea>
+                        <textarea name="task-description" id="new-task-description" rows="4" placeholder="Eg: Buy crackers from the shop for today's festive prep"></textarea>
                     </div>
                     <div>
                         <label for="task-due-date">Due-Date</label>
-                        <input type="datetime-local" name="due-date" id="task-due-date">
+                        <input type="datetime-local" name="due-date" id="new-task-due-date">
                     </div>
                     <div>
                         <label for="task-priority">*Priority</label>
-                        <select id="priority" name="task-priority">
+                        <select id="new-task-priority" name="task-priority">
                             <option value="low">Low</option>
                             <option value="medium">Medium</option>
                             <option value="high">High</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="project-categories">Project Category</label>
+                        <select name="project-categories" id="new-task-project-categories">
+                            
                         </select>
                     </div>
                     <button type="button" id="new-task-cancel" class="cancel-btn">Cancel</button>
@@ -50,7 +56,10 @@
                 </form>
             </dialog>
         </nav>
-        <div class="content">
+        <div id="project-bar">
+
+        </div>
+        <div id="content">
             
         </div>
         <footer>
