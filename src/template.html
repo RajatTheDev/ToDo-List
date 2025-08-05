@@ -11,8 +11,44 @@
             <h1>To Do List</h1>
             <div class="nav-buttons">
                 <button id="create-project">New Project</button>
-                <button title="New Task" id="create-task">Create Task</button>
+                <button title="New Task" id="create-task">+</button>
             </div>
+            <dialog id="new-project-dialog">
+                <h2>Create a Project</h2>
+                <form id="new-project-form" method="dialog">
+                    <label for="project-title">*Project Name</label>
+                    <input type="text" id="new-project-title" name="project-title" required>
+                    <button type="button" id="new-project-cancel" class="cancel-btn">Cancel</button>
+                    <button type="submit" id="new-project-submit" class="submit-btn">Submit</button>
+                </form>
+            </dialog>
+            <dialog id="new-task-dialog">
+                <h2>Create a Task</h2>
+                <form method="dialog" id="new-task-form">
+                    <div>
+                        <label for="task-title">*Task Name</label>
+                        <input type="text" id="task-title" name="task-title" placeholder="Diwali preparation" required>
+                    </div>
+                    <div>
+                        <label for="task-description">Description</label>
+                        <textarea name="task-description" id="task-description" rows="4" placeholder="Eg: Buy crackers from the shop for today's festive prep"></textarea>
+                    </div>
+                    <div>
+                        <label for="task-due-date">Due-Date</label>
+                        <input type="datetime-local" name="due-date" id="task-due-date">
+                    </div>
+                    <div>
+                        <label for="task-priority">*Priority</label>
+                        <select id="priority" name="task-priority">
+                            <option value="low">Low</option>
+                            <option value="medium">Medium</option>
+                            <option value="high">High</option>
+                        </select>
+                    </div>
+                    <button type="button" id="new-task-cancel" class="cancel-btn">Cancel</button>
+                    <button type="submit" id="new-task-submit" class="submit-btn">Submit</button>
+                </form>
+            </dialog>
         </nav>
         <div class="content">
             

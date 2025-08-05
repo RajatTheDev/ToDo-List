@@ -10,8 +10,8 @@ export default class Project {
         this.tasksList = [];
     }
 
-    createTask (title, description, dueDate, priority, isCompleted, projectCategory) {
-        let task = new taskCreator(title, description, dueDate, priority, isCompleted, projectCategory);
+    createTask (title, description, dueDate, priority, projectCategory) {
+        let task = new taskCreator(title, description, dueDate, priority, projectCategory);
         this.tasksList.push(task);
     }
     
@@ -25,14 +25,13 @@ export default class Project {
         });
     };
 
-    editTask (title, description, dueDate, priority, isCompleted, projectCategory, oldTitle) {
+    editTask (title, description, dueDate, priority, projectCategory, oldTitle) {
         this.tasksList.forEach(task => {
             if (task.title === oldTitle) {
                 task.title = checkUndefined(title, task.title);
                 task.description = checkUndefined(description, task.description);
                 task.dueDate = checkUndefined(dueDate, task.dueDate);
                 task.priority = checkUndefined(priority, task.priority);
-                task.isCompleted = checkUndefined(isCompleted, task.isCompleted);
                 task.projectCategory = checkUndefined(projectCategory, task.projectCategory);
             }
         })
@@ -73,10 +72,10 @@ const projectMethods = (() => {
 
 const taskMethods = (() => {
 
-    const addTask = (title, description, dueDate, priority, isCompleted, projectCategory) => {
+    const addTask = (title, description, dueDate, priority, projectCategory) => {
         projectsList.forEach(project => {
             if (project.title === projectCategory) {
-                project.createTask(title, description, dueDate, priority, isCompleted, projectCategory);
+                project.createTask(title, description, dueDate, priority, projectCategory);
             }
         })
     }
@@ -88,9 +87,9 @@ const taskMethods = (() => {
         })
     }
 
-    const editTask = (title, description, dueDate, priority, isCompleted, projectCategory, oldTitle) => {
+    const editTask = (title, description, dueDate, priority, projectCategory, oldTitle) => {
         projectsList.forEach(project => {
-            project.editTask(title, description, dueDate, priority, isCompleted, projectCategory, oldTitle);
+            project.editTask(title, description, dueDate, priority, projectCategory, oldTitle);
         })
     }
 
