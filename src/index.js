@@ -1,28 +1,29 @@
-import {projectsList, projectMethods, taskMethods} from "./modules/project.js";
+import Project, {projectsList, projectMethods, taskMethods} from "./modules/project.js";
 
 // default project
 
-function template() {
-    projectMethods.createProject('Default');
-    projectMethods.createProject('Day Start');
-    projectMethods.createProject('Random');
-    projectMethods.createProject('Personal');
-    
-    taskMethods.addTask('Washing', 'Cloth Washing process for my meeting', '20 july 2025', 'medium', 'Default');
-    taskMethods.addTask('Drying', 'Cloth drying process for my meeting', '21 july 2025', 'medium', 'Default');
-    taskMethods.addTask('Attend Meeting', 'Join the meeting at 9:00 AM', '22 july 2025', 'high', 'Default');
-    taskMethods.addTask('Hair Styling', 'Get your hairs ready for the Party!', '23 November 2025', 'low', 'Personal')
-}
 
-function templateMethods() {
-    projectMethods.deleteProject('Day Start');
-    taskMethods.deleteTask('Drying');
-    projectMethods.editProject('Default', 'Important');
-    taskMethods.editTask('Edit Task', '', '19 august 2029', 'high', 'Important', 'Washing');
-    console.table(projectsList);
-}
+projectMethods.createProject('Default');
+projectMethods.createProject('Day Start');
+projectMethods.createProject('Random');
+projectMethods.createProject('Personal');
 
-template();
+const defaultProject = projectsList.find(project => project.title === 'Default');
+
+const personalProject = projectsList.find(project => project.title === 'Personal')
+
+taskMethods.addTask('Washing', 'Cloth Washing process for my meeting', '20 july 2025', 'medium', defaultProject.projectID);
+taskMethods.addTask('Drying', 'Cloth drying process for my meeting', '21 july 2025', 'medium', defaultProject.projectID);
+taskMethods.addTask('Attend Meeting', 'Join the meeting at 9:00 AM', '22 july 2025', 'high', defaultProject.projectID);
+taskMethods.addTask('Hair Styling', 'Get your hairs ready for the Party!', '23 November 2025', 'low', personalProject.projectID);
+
+// edit/delete task/project example
+
+// projectMethods.deleteProject('Day Start');
+// taskMethods.deleteTask('Drying');
+// projectMethods.editProject('Default', 'Important');
+// taskMethods.editTask('Edit Task', '', '19 august 2029', 'high', 'Important', 'Washing');
+// console.table(projectsList);
 
 // Project Creation Form
 
@@ -74,10 +75,12 @@ const taskCreationForm = (() => {
         const description = document.getElementById('new-task-description').value.trim();
         const dueDate = document.getElementById('new-task-due-date').value;
         const priority = document.getElementById('new-task-priority').value;
-        const projectID = document.getElementById('new-task-project-category').value;
+        const projectID = document.getElementById('new-task-project-categories').value;
 
         taskMethods.addTask(title, description, dueDate, priority, projectID);
-
+        console.table(projectsList);
+        dialog.close();
+        form.reset();
     });
 
 }) ();

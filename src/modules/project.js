@@ -12,8 +12,8 @@ export default class Project {
         projectUpdater.uploadProject(this.title, this.projectID);
     }
 
-    createTask (title, description, dueDate, priority, projectCategory) {
-        let task = new taskCreator(title, description, dueDate, priority, projectCategory);
+    createTask (title, description, dueDate, priority, projectID) {
+        let task = new taskCreator(title, description, dueDate, priority, projectID);
         this.tasksList.push(task);
     }
     
@@ -27,14 +27,14 @@ export default class Project {
         });
     };
 
-    editTask (title, description, dueDate, priority, projectCategory, oldTitle) {
+    editTask (title, description, dueDate, priority, projectID, oldTitle) {
         this.tasksList.forEach(task => {
             if (task.title === oldTitle) {
                 task.title = checkUndefined(title, task.title);
                 task.description = checkUndefined(description, task.description);
                 task.dueDate = checkUndefined(dueDate, task.dueDate);
                 task.priority = checkUndefined(priority, task.priority);
-                task.projectCategory = checkUndefined(projectCategory, task.projectCategory);
+                task.projectID = checkUndefined(projectID, task.projectID);
             }
         })
     }
@@ -74,10 +74,10 @@ const projectMethods = (() => {
 
 const taskMethods = (() => {
 
-    const addTask = (title, description, dueDate, priority, projectCategory) => {
+    const addTask = (title, description, dueDate, priority, projectID) => {
         projectsList.forEach(project => {
-            if (project.title === projectCategory) {
-                project.createTask(title, description, dueDate, priority, projectCategory);
+            if (project.projectID === projectID) {
+                project.createTask(title, description, dueDate, priority, projectID);
             }
         })
     }
@@ -89,9 +89,9 @@ const taskMethods = (() => {
         })
     }
 
-    const editTask = (title, description, dueDate, priority, projectCategory, oldTitle) => {
+    const editTask = (title, description, dueDate, priority, projectID, oldTitle) => {
         projectsList.forEach(project => {
-            project.editTask(title, description, dueDate, priority, projectCategory, oldTitle);
+            project.editTask(title, description, dueDate, priority, projectID, oldTitle);
         })
     }
 
@@ -103,7 +103,7 @@ const taskMethods = (() => {
 }) ();
 
 const checkUndefined = (property, originalProperty) => {
-    if (property === undefined | property === '' | property === null) {
+    if (property === undefined || property === '' || property === null) {
         return originalProperty;
     } else {
         return property;
