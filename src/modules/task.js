@@ -7,8 +7,7 @@ export default class Task {
         this.dueDate = dueDate;
         this.priority = priority;
         this.isCompleted = false;
-        this.projectID = projectID;
         this.taskID = crypto.randomUUID();
-        taskUpdater.taskUploader(title, description, dueDate, priority, projectID);
+        taskUpdater.addTask(title, description, dueDate, priority, projectID, this.taskID);
     }
 }

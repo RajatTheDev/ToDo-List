@@ -1,13 +1,13 @@
 export const projectUpdater = (() => {
 
-    const uploadProject = (title, projectID) => {
+    const addProject = (title, projectID) => {
 
         // updates project's side bar
 
         const parentProjectBarDiv = document.getElementById('project-bar');
         const projectDiv = document.createElement('div');
         projectDiv.classList.add('project-div');
-        projectDiv.setAttribute('project-id', projectID);
+        projectDiv.setAttribute('data-project-id', projectID);
         
         const projectTitle = document.createElement('h3');
         projectTitle.textContent = title;
@@ -16,39 +16,65 @@ export const projectUpdater = (() => {
         projectDiv.appendChild(projectTitle);
         parentProjectBarDiv.appendChild(projectDiv);
 
+        // Edit and Delete buttons
+
+        const buttonDiv = document.createElement('div');
+
+        const editBtn = document.createElement('button');
+        editBtn.type = 'button';
+        editBtn.classList.add('edit-project-btn');
+        editBtn.textContent = "Edit Project";
+        buttonDiv.appendChild(editBtn);
+
+        const deleteBtn = document.createElement('button');
+        deleteBtn.type = 'button';
+        deleteBtn.classList.add('delete-project-btn');
+        deleteBtn.textContent = "Delete Project";
+        buttonDiv.appendChild(deleteBtn);
+
+        projectDiv.appendChild(buttonDiv);
+
         // updates project's main content body
 
         const contentDiv = document.getElementById('content');
         const parentProjectDiv = document.createElement('div');
         parentProjectDiv.classList.add('project-task-div');
-        parentProjectDiv.setAttribute('project-id', projectID);
+        parentProjectDiv.setAttribute('data-project-id', projectID);
 
         const projectHeading = document.createElement('h2');
         projectHeading.textContent = title;
         parentProjectDiv.appendChild(projectHeading);
 
+        const createTaskButton = document.createElement('button');
+        createTaskButton.textContent = "Add Task";
+        createTaskButton.classList.add('create-task-btn');
+        parentProjectDiv.appendChild(createTaskButton);
+
         contentDiv.appendChild(parentProjectDiv);
+    }
 
-        // updates task selection form
-
-        const projectCategories = document.getElementById('new-task-project-categories');
-        projectCategories.options.add(new Option(title, projectID));
-
+    const editProject = (newTitle, projectID) => {
+        const project = document.querySelectorAll(`[data-project-id="${projectID}"]`);
+        project.forEach(element => {
+            element.textContent = newTitle;
+        })
     }
 
     return {
-        uploadProject
+        addProject,
+        editProject
     }
 
 }) ();
 
 export const taskUpdater = (() => {
 
-    const taskUploader = (title, description, dueDate, priority, projectID) => {
+    const addTask = (title, description, dueDate, priority, projectID, taskID) => {
 
         const contentDiv = document.querySelector('#content');
-        const projectDiv = contentDiv.querySelector(`[project-id="${projectID}"]`);
+        const projectDiv = contentDiv.querySelector(`[data-project-id="${projectID}"]`);
         const taskDiv = document.createElement('div');
+        taskDiv.setAttribute('data-task-id', taskID);
         projectDiv.appendChild(taskDiv);
 
         const taskHeading = document.createElement('h3');
@@ -56,7 +82,7 @@ export const taskUpdater = (() => {
         taskDiv.appendChild(taskHeading);
 
         const taskDescription = document.createElement('p');
-        if (description != '' || description != undefined || description != null) {
+        if (description) {
             taskDescription.textContent = description;
         }
         taskDiv.appendChild(taskDescription);
@@ -69,10 +95,28 @@ export const taskUpdater = (() => {
         taskPriority.textContent = priority;
         taskDiv.appendChild(taskPriority);
 
+        // Edit & delete buttons
+
+        const buttonDiv = document.createElement('div');
+
+        const editBtn = document.createElement('button');
+        editBtn.type = 'button';
+        editBtn.classList.add('edit-task-btn');
+        editBtn.textContent = "Edit Task";
+        buttonDiv.appendChild(editBtn);
+
+        const deleteBtn = document.createElement('button');
+        deleteBtn.type = 'button';
+        deleteBtn.classList.add('delete-task-btn');
+        deleteBtn.textContent = "Delete Task";
+        buttonDiv.appendChild(deleteBtn);
+
+        taskDiv.appendChild(buttonDiv);
+
     }
 
     return {
-        taskUploader
+        addTask
     }
 
 }) ();
