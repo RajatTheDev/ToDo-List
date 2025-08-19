@@ -8,10 +8,10 @@ projectMethods.createProject('Personal');
 const defaultProject = projectsList.find(project => project.title === 'Default');
 const personalProject = projectsList.find(project => project.title === 'Personal')
 
-taskMethods.addTask('Washing', 'Cloth Washing process for my meeting', '20 july 2025', 'medium', defaultProject.projectID);
-taskMethods.addTask('Drying', 'Cloth drying process for my meeting', '21 july 2025', 'medium', defaultProject.projectID);
-taskMethods.addTask('Attend Meeting', 'Join the meeting at 9:00 AM', '22 july 2025', 'high', defaultProject.projectID);
-taskMethods.addTask('Hair Styling', 'Get your hairs ready for the Party!', '23 November 2025', 'low', personalProject.projectID);
+taskMethods.addTask('Washing', 'Cloth Washing process for my meeting', '2025-07-20', 'medium', defaultProject.projectID);
+taskMethods.addTask('Drying', 'Cloth drying process for my meeting', '2025-07-21', 'medium', defaultProject.projectID);
+taskMethods.addTask('Attend Meeting', 'Join the meeting at 9:00 AM', '2025-08-22', 'high', defaultProject.projectID);
+taskMethods.addTask('Hair Styling', 'Get your hairs ready for the Party!', '2025-09-23', 'low', personalProject.projectID);
 
 // Project Creation Form
 
@@ -53,6 +53,8 @@ const projectEditForm = (() => {
         if(event.target.classList.contains("edit-project-btn")) {
             const parentProject = event.target.closest('[data-project-id]');
             projectID = parentProject.dataset.projectId;
+            const currentTitle = parentProject.querySelector('.project-title').textContent;
+            newTitle.value = currentTitle;
             dialog.showModal();
         }
     })
@@ -97,20 +99,54 @@ const taskCreationForm = (() => {
 
     form.addEventListener('submit', (event) => {
         event.preventDefault();
-        taskMethods.addTask(
-            title.value,
-            description.value,
-            dueDate.value,
-            priority.value,
-            projectID
-        );
-
+        taskMethods.addTask(title.value, description.value, dueDate.value, priority.value, projectID);
         console.table(projectsList);
         resetAndClose(form, dialog);
     });
 
 }) ();
 
+// Task Edit Form
+
+const editTask = (() => {
+
+    const dialog = document.querySelector('#edit-task-dialog');
+    const form = document.querySelector('#edit-task-form');
+    const cancelButton = document.getElementById('edit-task-cancel');
+    const title = document.getElementById('edit-task-title');
+    const description = document.getElementById('edit-task-description');
+    const dueDate = document.getElementById('edit-task-due-date');
+    const priority = document.getElementById('edit-task-priority');
+    let task, taskID
+
+    document.body.addEventListener('click', (event) => {
+        if (event.target.classList.contains('edit-task-btn')) {
+            task = event.target.closest('[data-task-id]');
+            taskID = task.dataset.taskId;
+            // Note: retaining previous value
+            const currentTitle = task.querySelector('.task-title').textContent;
+            const currentDescription = task.querySelector('.task-description').textContent;
+            const currentDueDate = task.querySelector('.task-due-date').textContent;
+            const currentPriority = task.querySelector('.task-priority').textContent;
+            title.value = currentTitle;
+            description.value = currentDescription;
+            dueDate.value = currentDueDate;
+            priority.value = currentPriority;
+            dialog.showModal();
+        }
+    })
+
+    cancelButton.addEventListener('click', () => {
+        resetAndClose(form, dialog);
+    })
+
+    form.addEventListener('submit', (event) => {
+        event.preventDefault();
+        taskMethods.editTask(title.value, description.value, dueDate.value, priority.value, taskID);
+        resetAndClose(form, dialog);
+    })
+
+}) ();
 
 function resetAndClose(form, dialog) {
     dialog.close();

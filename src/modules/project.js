@@ -1,5 +1,5 @@
 import taskCreator from "./task.js";
-import { projectUpdater } from "./dom.js";
+import { projectUpdater, taskUpdater } from "./dom.js";
 export { projectsList, projectMethods, taskMethods };  
 
 let projectsList = [];
@@ -16,6 +16,18 @@ export default class Project {
         let task = new taskCreator(title, description, dueDate, priority, this.projectID);
         this.tasksList.push(task);
     }
+
+    editTask (title, description, dueDate, priority, taskID) {
+        this.tasksList.forEach(task => {
+            if (task.taskID === taskID) {
+                task.title = checkUndefined(title, task.title);
+                task.description = checkUndefined(description, task.description);
+                task.dueDate = checkUndefined(dueDate, task.dueDate);
+                task.priority = checkUndefined(priority, task.priority);
+                taskUpdater.editTask(title, description, dueDate, priority, taskID);
+            }
+        })
+    }
     
     deleteTask (taskTitle) {
         let count = 0;
@@ -26,17 +38,6 @@ export default class Project {
             count++;
         });
     };
-
-    editTask (title, description, dueDate, priority, oldTitle) {
-        this.tasksList.forEach(task => {
-            if (task.title === oldTitle) {
-                task.title = checkUndefined(title, task.title);
-                task.description = checkUndefined(description, task.description);
-                task.dueDate = checkUndefined(dueDate, task.dueDate);
-                task.priority = checkUndefined(priority, task.priority);
-            }
-        })
-    }
 }
 
 const projectMethods = (() => {
@@ -88,9 +89,9 @@ const taskMethods = (() => {
         })
     }
 
-    const editTask = (title, description, dueDate, priority, oldTitle) => {
+    const editTask = (title, description, dueDate, priority, taskID) => {
         projectsList.forEach(project => {
-            project.editTask(title, description, dueDate, priority, oldTitle);
+            project.editTask(title, description, dueDate, priority, taskID);
         })
     }
 

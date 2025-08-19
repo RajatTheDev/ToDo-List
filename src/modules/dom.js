@@ -23,7 +23,7 @@ export const projectUpdater = (() => {
         const editBtn = document.createElement('button');
         editBtn.type = 'button';
         editBtn.classList.add('edit-project-btn');
-        editBtn.textContent = "Edit Project";
+        editBtn.textContent = "Rename Project";
         buttonDiv.appendChild(editBtn);
 
         const deleteBtn = document.createElement('button');
@@ -78,20 +78,24 @@ export const taskUpdater = (() => {
         projectDiv.appendChild(taskDiv);
 
         const taskHeading = document.createElement('h3');
+        taskHeading.classList.add('task-title');
         taskHeading.textContent = title;
         taskDiv.appendChild(taskHeading);
 
         const taskDescription = document.createElement('p');
+        taskDescription.classList.add('task-description');
         if (description) {
             taskDescription.textContent = description;
         }
         taskDiv.appendChild(taskDescription);
 
         const taskDueDate = document.createElement('p');
+        taskDueDate.classList.add('task-due-date');
         taskDueDate.textContent = dueDate;
         taskDiv.appendChild(taskDueDate);
 
         const taskPriority = document.createElement('p');
+        taskPriority.classList.add('task-priority');
         taskPriority.textContent = priority;
         taskDiv.appendChild(taskPriority);
 
@@ -115,8 +119,17 @@ export const taskUpdater = (() => {
 
     }
 
+    const editTask = (title, description, dueDate, priority, taskID) => {
+        const task = document.querySelector(`[data-task-id="${taskID}"]`);
+        task.querySelector('.task-title').textContent = title
+        task.querySelector('.task-description').textContent = description
+        task.querySelector('.task-due-date').textContent = dueDate
+        task.querySelector('.task-priority').textContent = priority
+    }
+
     return {
-        addTask
+        addTask,
+        editTask
     }
 
 }) ();
