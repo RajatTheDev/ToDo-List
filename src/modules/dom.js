@@ -56,7 +56,7 @@ export const projectUpdater = (() => {
     const editProject = (newTitle, projectID) => {
         const project = document.querySelectorAll(`[data-project-id="${projectID}"]`);
         project.forEach(element => {
-            element.textContent = newTitle;
+            element.firstChild.textContent = newTitle;
         })
     }
 
