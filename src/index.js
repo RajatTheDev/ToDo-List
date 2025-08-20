@@ -72,6 +72,33 @@ const projectEditForm = (() => {
 
 }) ();
 
+// Project Deletion Dialog
+
+const deleteProjectDialog = (() => {
+    const dialog = document.querySelector('#delete-project-dialog');
+    const form = document.querySelector('#delete-project-form');
+    const cancelButton = document.querySelector('#delete-project-cancel');
+    let projectID;
+
+    document.body.addEventListener('click', (event) => {
+        if (event.target.classList.contains('delete-project-btn')) {
+            const parentProject = event.target.closest('[data-project-id]');
+            projectID = parentProject.dataset.projectId;
+            dialog.showModal();
+        }
+    })
+
+    cancelButton.addEventListener('click', () => {
+        dialog.close();
+    })
+
+    form.addEventListener('submit', () => {
+        projectMethods.deleteProject(projectID);
+        dialog.close();
+    })
+
+}) ();
+
 // Task Creation Form
 
 const taskCreationForm = (() => {
@@ -144,6 +171,31 @@ const editTask = (() => {
         event.preventDefault();
         taskMethods.editTask(title.value, description.value, dueDate.value, priority.value, taskID);
         resetAndClose(form, dialog);
+    })
+
+}) ();
+
+const deleteTaskDialog = (() => {
+    const dialog = document.querySelector('#delete-task-dialog');
+    const form = document.querySelector('#delete-task-form');
+    const cancelButton = document.querySelector('#delete-task-cancel');
+    let taskID;
+
+    document.body.addEventListener('click', (event) => {
+        if (event.target.classList.contains('delete-task-btn')) {
+            const parentProject = event.target.closest('[data-task-id]');
+            taskID = parentProject.dataset.taskId;
+            dialog.showModal();
+        }
+    })
+
+    cancelButton.addEventListener('click', () => {
+        dialog.close();
+    })
+
+    form.addEventListener('submit', () => {
+        taskMethods.deleteTask(taskID);
+        dialog.close();
     })
 
 }) ();

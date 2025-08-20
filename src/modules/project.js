@@ -29,10 +29,10 @@ export default class Project {
         })
     }
     
-    deleteTask (taskTitle) {
+    deleteTask (taskID) {
         let count = 0;
         this.tasksList.forEach(task => {
-            if(task.title === taskTitle) {
+            if(task.taskID === taskID) {
                 this.tasksList.splice(count, 1);
             }
             count++;
@@ -47,14 +47,15 @@ const projectMethods = (() => {
             projectsList.push(newProject);
     }
 
-    const deleteProject = (projectTitle) => {
+    const deleteProject = (projectID) => {
         let count = 0;
         projectsList.forEach(project => {
-            if (project.title === projectTitle) {
+            if (project.projectID === projectID) {
                 projectsList.splice(count, 1);
             }
             count++;
         });
+        projectUpdater.deleteProject(projectID);
     };
 
     const editProject = (newTitle, projectID) => {
@@ -83,10 +84,11 @@ const taskMethods = (() => {
         })
     }
 
-    const deleteTask = (taskTitle) => {
+    const deleteTask = (taskID) => {
         projectsList.forEach(project => {
-            project.deleteTask(taskTitle);
+            project.deleteTask(taskID);
         })
+        taskUpdater.deleteTask(taskID);
     }
 
     const editTask = (title, description, dueDate, priority, taskID) => {

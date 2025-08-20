@@ -4,7 +4,7 @@ export const projectUpdater = (() => {
 
         // updates project's side bar
 
-        const parentProjectBarDiv = document.getElementById('project-bar');
+        const parentProjectBarDiv = document.querySelector('#project-bar');
         const projectDiv = document.createElement('div');
         projectDiv.classList.add('project-div');
         projectDiv.setAttribute('data-project-id', projectID);
@@ -36,7 +36,7 @@ export const projectUpdater = (() => {
 
         // updates project's main content body
 
-        const contentDiv = document.getElementById('content');
+        const contentDiv = document.querySelector('#content');
         const parentProjectDiv = document.createElement('div');
         parentProjectDiv.classList.add('project-task-div');
         parentProjectDiv.setAttribute('data-project-id', projectID);
@@ -60,9 +60,17 @@ export const projectUpdater = (() => {
         })
     }
 
+    const deleteProject = (projectID) => {
+        const project = document.querySelectorAll(`[data-project-id="${projectID}`);
+        project.forEach(element => {
+            element.remove();
+        })
+    }
+
     return {
         addProject,
-        editProject
+        editProject,
+        deleteProject
     }
 
 }) ();
@@ -127,9 +135,14 @@ export const taskUpdater = (() => {
         task.querySelector('.task-priority').textContent = priority
     }
 
+    const deleteTask = (taskID) => {
+        const task = document.querySelector(`[data-task-id="${taskID}"]`).remove();
+    }
+
     return {
         addTask,
-        editTask
+        editTask,
+        deleteTask
     }
 
 }) ();
