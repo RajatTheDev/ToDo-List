@@ -1,3 +1,6 @@
+import editIcon from "../images/edit.svg";
+import deleteIcon from "../images/delete.svg";
+
 export const projectUpdater = (() => {
 
     const addProject = (title, projectID) => {
@@ -20,16 +23,16 @@ export const projectUpdater = (() => {
 
         const buttonDiv = document.createElement('div');
 
-        const editBtn = document.createElement('button');
-        editBtn.type = 'button';
-        editBtn.classList.add('edit-project-btn');
-        editBtn.textContent = "Rename Project";
+        const editBtn = document.createElement('img');
+        editBtn.src = editIcon;
+        editBtn.title = "Rename Project";
+        editBtn.classList.add('edit-project-btn', 'icon');
         buttonDiv.appendChild(editBtn);
 
-        const deleteBtn = document.createElement('button');
-        deleteBtn.type = 'button';
-        deleteBtn.classList.add('delete-project-btn');
-        deleteBtn.textContent = "Delete Project";
+        const deleteBtn = document.createElement('img');
+        deleteBtn.src = deleteIcon;
+        deleteBtn.title = "Delete Project";
+        deleteBtn.classList.add('delete-project-btn', 'icon');
         buttonDiv.appendChild(deleteBtn);
 
         projectDiv.appendChild(buttonDiv);
@@ -41,15 +44,18 @@ export const projectUpdater = (() => {
         parentProjectDiv.classList.add('project-task-div');
         parentProjectDiv.setAttribute('data-project-id', projectID);
 
+        const headingDiv = document.createElement('div');
+        headingDiv.classList.add('project-task-header');
+
         const projectHeading = document.createElement('h2');
         projectHeading.textContent = title;
-        parentProjectDiv.appendChild(projectHeading);
+        headingDiv.appendChild(projectHeading);
 
         const createTaskButton = document.createElement('button');
         createTaskButton.textContent = "Add Task";
         createTaskButton.classList.add('create-task-btn');
-        parentProjectDiv.appendChild(createTaskButton);
-
+        headingDiv.appendChild(createTaskButton);
+        parentProjectDiv.appendChild(headingDiv);
         contentDiv.appendChild(parentProjectDiv);
     }
 
@@ -82,14 +88,49 @@ export const taskUpdater = (() => {
         const contentDiv = document.querySelector('#content');
         const projectDiv = contentDiv.querySelector(`[data-project-id="${projectID}"]`);
         const taskDiv = document.createElement('div');
+        taskDiv.classList.add('task-div');
         taskDiv.setAttribute('data-task-id', taskID);
         projectDiv.appendChild(taskDiv);
+
+        const taskHeader = document.createElement('div');
+        taskHeader.classList.add('task-header');
 
         const taskHeading = document.createElement('h3');
         taskHeading.classList.add('task-title');
         taskHeading.textContent = title;
-        taskDiv.appendChild(taskHeading);
+        taskHeader.appendChild(taskHeading);
 
+        // Edit & delete buttons
+
+        const buttonDiv = document.createElement('div');
+
+        const editBtn = document.createElement('img');
+        editBtn.src = editIcon;
+        editBtn.title = "Edit Task";
+        editBtn.classList.add('edit-task-btn', 'icon');
+        buttonDiv.appendChild(editBtn);
+
+        const deleteBtn = document.createElement('img');
+        deleteBtn.src = deleteIcon;
+        deleteBtn.title = "Delete Task";
+        deleteBtn.classList.add('delete-task-btn', 'icon');
+        buttonDiv.appendChild(deleteBtn);
+
+        taskHeader.appendChild(buttonDiv);
+        taskDiv.appendChild(taskHeader);
+
+        // task info
+
+        const taskDueDiv = document.createElement('div');
+        const taskDueLabel = document.createElement('span');
+        taskDueLabel.textContent = "Due: ";
+        taskDueDiv.appendChild(taskDueLabel);
+        const taskDueDate = document.createElement('span');
+        taskDueDate.classList.add('task-due-date');
+        taskDueDate.textContent = dueDate;
+        taskDueDiv.appendChild(taskDueDate);
+        taskDiv.appendChild(taskDueDiv);
+        
         const taskDescription = document.createElement('p');
         taskDescription.classList.add('task-description');
         if (description) {
@@ -97,34 +138,14 @@ export const taskUpdater = (() => {
         }
         taskDiv.appendChild(taskDescription);
 
-        const taskDueDate = document.createElement('p');
-        taskDueDate.classList.add('task-due-date');
-        taskDueDate.textContent = dueDate;
-        taskDiv.appendChild(taskDueDate);
-
-        const taskPriority = document.createElement('p');
-        taskPriority.classList.add('task-priority');
-        taskPriority.textContent = priority;
-        taskDiv.appendChild(taskPriority);
-
-        // Edit & delete buttons
-
-        const buttonDiv = document.createElement('div');
-
-        const editBtn = document.createElement('button');
-        editBtn.type = 'button';
-        editBtn.classList.add('edit-task-btn');
-        editBtn.textContent = "Edit Task";
-        buttonDiv.appendChild(editBtn);
-
-        const deleteBtn = document.createElement('button');
-        deleteBtn.type = 'button';
-        deleteBtn.classList.add('delete-task-btn');
-        deleteBtn.textContent = "Delete Task";
-        buttonDiv.appendChild(deleteBtn);
-
-        taskDiv.appendChild(buttonDiv);
-
+        taskDiv.dataset.priority = priority;
+        if (priority === "low") {
+            taskDiv.classList.add('low-priority');
+        } else if (priority === "medium") {
+            taskDiv.classList.add('medium-priority')
+        } else if (priority === "high") {
+            taskDiv.classList.add('high-priority')
+        }
     }
 
     const editTask = (title, description, dueDate, priority, taskID) => {
@@ -132,7 +153,17 @@ export const taskUpdater = (() => {
         task.querySelector('.task-title').textContent = title
         task.querySelector('.task-description').textContent = description
         task.querySelector('.task-due-date').textContent = dueDate
-        task.querySelector('.task-priority').textContent = priority
+        
+        task.dataset.priority = priority;
+        task.classList.remove('low-priority', 'medium-priority', 'high-priority');
+
+        if (priority === "low") {
+            task.classList.add('low-priority');
+        } else if (priority === "medium") {
+            task.classList.add('medium-priority');
+        } else if (priority === "high") {
+            task.classList.add('high-priority');
+        }
     }
 
     const deleteTask = (taskID) => {

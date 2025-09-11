@@ -1,4 +1,5 @@
 import {projectsList, projectMethods, taskMethods} from "./modules/project.js";
+import './style.css';
 
 // default project
 
@@ -154,7 +155,7 @@ const editTask = (() => {
             const currentTitle = task.querySelector('.task-title').textContent;
             const currentDescription = task.querySelector('.task-description').textContent;
             const currentDueDate = task.querySelector('.task-due-date').textContent;
-            const currentPriority = task.querySelector('.task-priority').textContent;
+            const currentPriority = task.dataset.priority;
             title.value = currentTitle;
             description.value = currentDescription;
             dueDate.value = currentDueDate;

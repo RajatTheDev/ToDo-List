@@ -1,0 +1,129 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto 1fr auto;
+    min-height: 100vh;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    grid-column: span 2;
+    padding: 16px 24px;
+    border-right: 3px solid #f5f5f5;
+}
+
+#create-project {
+    padding: 10px;
+    border-radius: 10px;
+    border: 0px;
+}
+
+#project-bar {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.project-div {
+    padding: 10px 20px;
+    border-radius: 12px;
+    display: flex;
+    justify-content: space-between;
+    width: 230px;
+}
+
+.project-div:hover {
+    background-color: #f5f5f5;
+    transition: ease-in-out 0.2s;
+    box-shadow: 1px 1px 2px 1px #f5f5f5;
+}
+
+.project-title {
+    overflow-inline: auto;
+    width: 110px;
+}
+
+#content {
+    padding: 20px;
+    background: #fff;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+}
+
+footer {
+    padding: 20px;
+    grid-column: span 2;
+    text-align: center;
+    background: #f5f5f5;
+}
+
+.icon {
+    width: 24px;
+}
+
+.icon:hover {
+    transition: transform 0.3s ease-in-out;
+    transform: scale(1.2);
+}
+
+.project-task-div {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 28px;
+    width: 400px;
+    background-color: #f5f5f5;
+    border: 1px solid #000000;
+    border-radius: 24px;
+}
+
+.project-task-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.create-task-btn {
+    padding: 0 10px;
+    border-radius: 6px;
+    border: 0px;
+}
+
+.create-task-btn:hover,
+#create-project:hover{
+    transition: transform 0.2s ease-in-out;
+    transform: scale(1.04);
+    box-shadow: 0px 0px 1px 1px #efefef;
+}
+
+.task-div {
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 10px;
+    border-left: 4px solid #cecece;
+}
+
+.task-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.low-priority {
+    border-left-color: lightgreen;
+}
+
+.medium-priority {
+    border-left-color: orange;
+}
+
+.high-priority {
+    border-left-color: red;
+}
