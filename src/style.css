@@ -16,24 +16,52 @@ header {
     justify-content: space-between;
     grid-column: span 2;
     padding: 16px 24px;
-    border-right: 3px solid #f5f5f5;
+    border-bottom: 3px solid #f5f5f5;
 }
 
 #create-project {
     padding: 10px;
     border-radius: 10px;
     border: 0px;
+    cursor: pointer;
 }
 
 #project-bar {
-    padding: 20px;
+    border-right: 3px solid #f5f5f5;
+}
+
+.sidebar-header {
+    padding: 10px 24px;
+    margin-bottom: 10px;
     display: flex;
-    flex-direction: column;
-    gap: 10px;
+    justify-content: space-between;
+}
+
+.sidebar {
+    min-width: fit-content;
+    max-width: 250px;
+    transition: max-width 0.3s ease, padding 0.3s ease;
+}
+
+.sidebar.collapsed {
+    width: fit-content;
+    overflow: hidden; 
+}
+
+.sidebar.collapsed .project-div {
+    justify-content: center;
+    width: 100%; 
+}
+
+.sidebar.collapsed .sidebar-header h2,
+.sidebar.collapsed .project-div img,
+.sidebar.collapsed .project-title {
+    display: none;
 }
 
 .project-div {
-    padding: 10px 20px;
+    padding: 10px 24px;
+    margin: 0 10px;
     border-radius: 12px;
     display: flex;
     justify-content: space-between;
@@ -68,6 +96,7 @@ footer {
 
 .icon {
     width: 24px;
+    cursor: pointer;
 }
 
 .icon:hover {
@@ -80,7 +109,8 @@ footer {
     flex-direction: column;
     gap: 20px;
     padding: 28px;
-    width: 400px;
+    height: fit-content;
+    width: 360px;
     background-color: #f5f5f5;
     border: 1px solid #000000;
     border-radius: 24px;
@@ -95,6 +125,7 @@ footer {
     padding: 0 10px;
     border-radius: 6px;
     border: 0px;
+    cursor: pointer;
 }
 
 .create-task-btn:hover,

@@ -201,9 +201,18 @@ const deleteTaskDialog = (() => {
 
 }) ();
 
+const sidebarToggle = (() => {
+
+    const sidebar = document.getElementById("project-bar");
+    const toggleBtn = document.getElementById("sidebar-toggle");
+
+    toggleBtn.addEventListener("click", () => {
+        sidebar.classList.toggle("collapsed");
+    });
+
+}) ();
+
 function resetAndClose(form, dialog) {
     dialog.close();
     form.reset();
 }
-
-console.table(projectsList);
