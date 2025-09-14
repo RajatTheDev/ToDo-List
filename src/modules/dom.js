@@ -123,7 +123,9 @@ export const taskUpdater = (() => {
 
         const taskDueDiv = document.createElement('div');
         const taskDueLabel = document.createElement('span');
-        taskDueLabel.textContent = "Due: ";
+        if (dueDate) {
+            taskDueLabel.textContent = "Due: ";
+        }
         taskDueDiv.appendChild(taskDueLabel);
         const taskDueDate = document.createElement('span');
         taskDueDate.classList.add('task-due-date');
