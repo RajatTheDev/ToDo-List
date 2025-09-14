@@ -212,6 +212,15 @@ const sidebarToggle = (() => {
 
 }) ();
 
+const minDateSetter = (() => {
+    const today = new Date().toISOString().split('T')[0];
+    const dueDates = document.querySelectorAll(".due-date");
+    
+    dueDates.forEach(dateInput => {
+        dateInput.min = today;
+    });
+}) ();
+
 function resetAndClose(form, dialog) {
     dialog.close();
     form.reset();
