@@ -10,7 +10,7 @@ const defaultProject = projectsList.find(project => project.title === 'Default')
 const personalProject = projectsList.find(project => project.title === 'Personal')
 
 taskMethods.addTask('Washing', 'Cloth Washing process for my meeting', '2025-07-20', 'medium', defaultProject.projectID);
-taskMethods.addTask('Drying', 'Cloth drying process for my meeting', '2025-07-21', 'medium', defaultProject.projectID);
+taskMethods.addTask('Drying', 'Cloth drying process for my meeting', '2025-07-21', 'none', defaultProject.projectID);
 taskMethods.addTask('Attend Meeting', 'Join the meeting at 9:00 AM', '2025-08-22', 'high', defaultProject.projectID);
 taskMethods.addTask('Hair Styling', 'Get your hairs ready for the Party!', '2025-09-23', 'low', personalProject.projectID);
 
@@ -203,7 +203,7 @@ const deleteTaskDialog = (() => {
 
 const sidebarToggle = (() => {
 
-    const sidebar = document.getElementById("project-bar");
+    const sidebar = document.getElementById("sidebar");
     const toggleBtn = document.getElementById("sidebar-toggle");
 
     toggleBtn.addEventListener("click", () => {

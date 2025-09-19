@@ -7,6 +7,5 @@ export default class Task {
         this.dueDate = dueDate;
         this.priority = priority;
         this.taskID = crypto.randomUUID();
-        taskUpdater.addTask(title, description, dueDate, priority, projectID, this.taskID);
     }
 }

@@ -36,7 +36,7 @@ header {
     cursor: pointer;
 }
 
-#project-bar {
+#sidebar {
     border-right: 1px solid #363636;
 }
 
@@ -113,7 +113,8 @@ footer {
     gap: 20px;
     padding: 28px;
     height: fit-content;
-    max-width: 360px;
+    min-width: 360px;
+    max-width: 450px;
     background-color: #2C2C2C;
     border: 1px solid #000000;
     border-radius: 24px;
@@ -121,11 +122,13 @@ footer {
 
 .project-task-header {
     display: flex;
+    gap: 20px;
     justify-content: space-between;
     margin-left: 12px;
 }
 
 .create-task-btn {
+    height: 30px;
     background-color: #a455d2;
     color: #fff;
     padding: 0 10px;

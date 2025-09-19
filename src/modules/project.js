@@ -1,5 +1,6 @@
 import taskCreator from "./task.js";
-import { projectUpdater, taskUpdater } from "./dom.js";
+import { localStorageHandler } from "./storage.js";
+import { projectUpdater, renderAll, taskUpdater } from "./dom.js";
 export { projectsList, projectMethods, taskMethods };  
 
 let projectsList = [];
@@ -9,12 +10,13 @@ export default class Project {
         this.title = title;
         this.projectID = crypto.randomUUID()
         this.tasksList = [];
-        projectUpdater.addProject(this.title, this.projectID);
     }
 
     createTask (title, description, dueDate, priority) {
         let task = new taskCreator(title, description, dueDate, priority, this.projectID);
         this.tasksList.push(task);
+        renderAll(projectsList);
+        localStorageHandler.saveToLocalStorage(projectsList);
     }
 
     editTask (title, description, dueDate, priority, taskID) {
@@ -24,9 +26,10 @@ export default class Project {
                 task.description = checkUndefined(description, task.description);
                 task.dueDate = checkUndefined(dueDate, task.dueDate);
                 task.priority = checkUndefined(priority, task.priority);
-                taskUpdater.editTask(title, description, dueDate, priority, taskID);
             }
         })
+        renderAll(projectsList);
+        localStorageHandler.saveToLocalStorage(projectsList);
     }
     
     deleteTask (taskID) {
@@ -37,6 +40,8 @@ export default class Project {
             }
             count++;
         });
+        renderAll(projectsList);
+        localStorageHandler.saveToLocalStorage(projectsList);
     };
 }
 
@@ -44,7 +49,9 @@ const projectMethods = (() => {
 
     const createProject = (title) => {
         let newProject = new Project(title);
-            projectsList.push(newProject);
+        projectsList.push(newProject);
+        renderAll(projectsList);
+        localStorageHandler.saveToLocalStorage(projectsList);
     }
 
     const deleteProject = (projectID) => {
@@ -55,7 +62,8 @@ const projectMethods = (() => {
             }
             count++;
         });
-        projectUpdater.deleteProject(projectID);
+        renderAll(projectsList);
+        localStorageHandler.saveToLocalStorage(projectsList);
     };
 
     const editProject = (newTitle, projectID) => {
@@ -64,7 +72,8 @@ const projectMethods = (() => {
                 project.title = newTitle;
             }
         });
-        projectUpdater.editProject(newTitle, projectID);
+        renderAll(projectsList);
+        localStorageHandler.saveToLocalStorage(projectsList);
     }
 
     return {
@@ -88,7 +97,6 @@ const taskMethods = (() => {
         projectsList.forEach(project => {
             project.deleteTask(taskID);
         })
-        taskUpdater.deleteTask(taskID);
     }
 
     const editTask = (title, description, dueDate, priority, taskID) => {
