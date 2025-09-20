@@ -1,19 +1,19 @@
-import taskCreator from "./task.js";
+import { Task } from "./task.js";
 import { localStorageHandler } from "./storage.js";
-import { projectUpdater, renderAll, taskUpdater } from "./dom.js";
+import { renderAll } from "./dom.js";
 export { projectsList, projectMethods, taskMethods };  
 
 let projectsList = [];
 
-export default class Project {
-    constructor (title) {
+export class Project {
+    constructor (title, projectID) {
         this.title = title;
-        this.projectID = crypto.randomUUID()
+        this.projectID = projectID ?? crypto.randomUUID()
         this.tasksList = [];
     }
 
     createTask (title, description, dueDate, priority) {
-        let task = new taskCreator(title, description, dueDate, priority, this.projectID);
+        let task = new Task(title, description, dueDate, priority);
         this.tasksList.push(task);
         renderAll(projectsList);
         localStorageHandler.saveToLocalStorage(projectsList);

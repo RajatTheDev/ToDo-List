@@ -1,18 +1,26 @@
-import {projectsList, projectMethods, taskMethods} from "./modules/project.js";
+import { projectsList, projectMethods, taskMethods } from "./modules/project.js";
+import { localStorageHandler } from "./modules/storage.js"; 
+import { renderAll } from "./modules/dom.js";
 import './style.css';
 
 // default project
+localStorageHandler.loadFromLocalStorage();
 
-projectMethods.createProject('Default');
-projectMethods.createProject('Personal');
+if (projectsList.length === 0) {
 
-const defaultProject = projectsList.find(project => project.title === 'Default');
-const personalProject = projectsList.find(project => project.title === 'Personal')
+    projectMethods.createProject("Default");
+    projectMethods.createProject("Personal");
+    const defaultProject = projectsList.find(project => project.title === 'Default');
+    const personalProject = projectsList.find(project => project.title === 'Personal')
+    
+    taskMethods.addTask('Washing', 'Cloth Washing process for my meeting', '2025-07-20', 'medium', defaultProject.projectID);
+    taskMethods.addTask('Drying', 'Cloth drying process for my meeting', '2025-07-21', 'none', defaultProject.projectID);
+    taskMethods.addTask('Attend Meeting', 'Join the meeting at 9:00 AM', '2025-08-22', 'high', defaultProject.projectID);
+    taskMethods.addTask('Hair Styling', 'Get your hairs ready for the Party!', '2025-09-23', 'low', personalProject.projectID);
 
-taskMethods.addTask('Washing', 'Cloth Washing process for my meeting', '2025-07-20', 'medium', defaultProject.projectID);
-taskMethods.addTask('Drying', 'Cloth drying process for my meeting', '2025-07-21', 'none', defaultProject.projectID);
-taskMethods.addTask('Attend Meeting', 'Join the meeting at 9:00 AM', '2025-08-22', 'high', defaultProject.projectID);
-taskMethods.addTask('Hair Styling', 'Get your hairs ready for the Party!', '2025-09-23', 'low', personalProject.projectID);
+}
+
+renderAll(projectsList);
 
 // Project Creation Form
 
@@ -136,7 +144,7 @@ const taskCreationForm = (() => {
 
 // Task Edit Form
 
-const editTask = (() => {
+const editTaskForm = (() => {
 
     const dialog = document.querySelector('#edit-task-dialog');
     const form = document.querySelector('#edit-task-form');
