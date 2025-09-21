@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do-List</title>
+<script defer src="main.js"></script></head>
+<body>
+    <header>
+        <h1>To Do List</h1>
+        <nav>
+            <div class="nav-button">
+                <button id="create-project">New Project</button>
+            </div>
+        </nav>
+    </header>
+    <div class="main-body">
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h2>All Projects</h2>
+                <img src="05d009967553740d0af8.svg" id="sidebar-toggle" class="icon sidebar-toggle" alt="sidebar-toggle">
+            </div>
+            <div id="project-bar">
+            </div>
+        </div>
+        <div id="content">
+        </div>
+    </div>
+    <div class="dialog-div">
+        <dialog id="new-project-dialog">
+            <h2>Create a Project</h2>
+            <form id="new-project-form" method="dialog">
+                <div class="project-form-field">
+                    <label for="new-project-title">Project Name</label>
+                    <input type="text" id="new-project-title" name="project-title">
+                </div>
+                <div class="project-form-btn button-div">
+                    <button type="button" id="new-project-cancel" class="cancel-btn">Cancel</button>
+                    <button type="submit" id="new-project-submit" class="submit-btn">Submit</button>
+                </div>
+            </form>
+        </dialog>
+        <dialog id="new-task-dialog">
+            <h2>Create a Task</h2>
+            <form method="dialog" id="new-task-form">
+                <div>
+                    <label for="new-task-title">Task Name</label>
+                    <input type="text" id="new-task-title" name="task-title">
+                </div>
+                <div>
+                    <label for="new-task-description">Description</label>
+                    <textarea name="task-description" id="new-task-description" rows="2"></textarea>
+                </div>
+                <div>
+                    <label for="new-task-due-date">Due-Date</label>
+                    <input type="date" name="due-date" id="new-task-due-date" class="due-date">
+                </div>
+                <div>
+                    <label for="new-task-priority">Priority</label>
+                    <select id="new-task-priority" name="task-priority">
+                        <option value="none">None</option>
+                        <option value="low">Low</option>
+                        <option value="medium">Medium</option>
+                        <option value="high">High</option>
+                    </select>
+                </div>
+                <div class="button-div">
+                    <button type="button" id="new-task-cancel" class="cancel-btn">Cancel</button>
+                    <button type="submit" id="new-task-submit" class="submit-btn">Submit</button>
+                </div>
+            </form>
+        </dialog>
+        <dialog id="edit-project-dialog">
+            <h2>Edit Project</h2>
+            <form method="dialog" id="edit-project-form">
+                <div class="project-form-field">
+                    <label for="edit-project-title">Project Name</label>
+                    <input type="text" id="edit-project-title" name="project-title">
+                </div>
+                <div class="project-form-btn button-div">
+                    <button type="button" id="edit-project-cancel" class="cancel-btn">Cancel</button>
+                    <button type="submit" id="edit-project-submit" class="submit-btn">Submit</button>
+                </div>
+            </form>
+        </dialog>
+        <dialog id="edit-task-dialog">
+            <h2>Edit Task</h2>
+            <form method="dialog" id="edit-task-form">
+                <div>
+                    <label for="edit-task-title">Task Name</label>
+                    <input type="text" id="edit-task-title" name="task-title">
+                </div>
+                <div>
+                    <label for="edit-task-description">Description</label>
+                    <textarea name="task-description" id="edit-task-description" rows="2"></textarea>
+                </div>
+                <div>
+                    <label for="edit-task-due-date">Due-Date</label>
+                    <input type="date" name="due-date" id="edit-task-due-date" class="due-date">
+                </div>
+                <div>
+                    <label for="edit-task-priority">Priority</label>
+                    <select id="edit-task-priority" name="task-priority">
+                        <option value="none">None</option>
+                        <option value="low">Low</option>
+                        <option value="medium">Medium</option>
+                        <option value="high">High</option>
+                    </select>
+                </div>
+                <div class="button-div">
+                    <button type="button" id="edit-task-cancel" class="cancel-btn">Cancel</button>
+                    <button type="submit" id="edit-task-submit" class="submit-btn">Submit</button>
+                </div>
+            </form>
+        </dialog>
+        <dialog id="delete-project-dialog">
+            <form method="dialog" id="delete-project-form">
+                <h2>Confirm Delete</h2>
+                <p>Are you sure you want to delete this Project?</p>
+                <div class="button-div">
+                    <button type="button" id="delete-project-cancel" class="cancel-btn">Cancel</button>
+                    <button type="submit" id="delete-project-submit" class="submit-btn">Confirm</button>
+                </div>
+            </form>
+        </dialog>
+        <dialog id="delete-task-dialog">
+            <form method="dialog" id="delete-task-form">
+                <h2>Confirm Delete</h2>
+                <p>Are you sure you want to delete this task?</p>
+                <div class="button-div">
+                    <button type="button" id="delete-task-cancel" class="cancel-btn">Cancel</button>
+                    <button type="submit" id="delete-task-submit" class="submit-btn">Confirm</button>
+                </div>
+            </form>
+        </dialog>
+    </div>
+    <footer>
+        <span>Developed by Rajat <a href="https://github.com/RajatTheDev" target="_blank"><img src="8d1bc524d64f25bee143.svg" alt="github-logo" class="logo"></a></span>
+    </footer>
+</body>
+</html>
