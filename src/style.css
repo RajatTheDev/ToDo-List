@@ -188,6 +188,10 @@ dialog {
     padding: 50px;
 }
 
+dialog::backdrop {
+    backdrop-filter: blur(1.5px);
+}
+
 dialog h2 {
     text-align: center;
 }
