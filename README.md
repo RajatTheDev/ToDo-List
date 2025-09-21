@@ -16,7 +16,7 @@ A modern and professional **To-Do-List application** built with **vanilla JavaSc
 
 ## Live Preview
 
-- You can see the live preview [here](https://rajatthedev.github.io/Ichiraku-Ramen/)
+- You can see the live preview [here](https://rajatthedev.github.io/ToDo-List/)
 
 ## Features
 
