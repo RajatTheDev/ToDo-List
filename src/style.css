@@ -120,7 +120,6 @@ footer {
     flex-direction: column;
     gap: 20px;
     padding: 28px;
-    height: fit-content;
     min-width: 360px;
     max-width: 450px;
     background-color: #2C2C2C;
@@ -161,6 +160,11 @@ footer {
 .task-header {
     display: flex;
     justify-content: space-between;
+}
+
+.task-div > div:nth-child(2),
+.task-div > p {
+    color: #aeaeae;
 }
 
 .low-priority {
@@ -261,4 +265,3 @@ textarea {
     transition: transform ease-in-out 0.3s;
     transform: rotate(360deg) scale(1.2);
 }
-

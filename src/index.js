@@ -4,6 +4,7 @@ import { renderAll } from "./modules/dom.js";
 import './style.css';
 
 // default project
+
 localStorageHandler.loadFromLocalStorage();
 
 if (projectsList.length === 0) {
